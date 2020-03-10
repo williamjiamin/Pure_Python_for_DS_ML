@@ -24,9 +24,9 @@ def csv_loader(filename):
     return dataset
 
 
-dataset_list = csv_loader('winequality-white.csv')
-
-print(dataset_list)
+# dataset_list = csv_loader('winequality-white.csv')
+#
+# print(dataset_list)
 
 
 # 3.Convert our datatype
@@ -101,3 +101,63 @@ def how_good_is_our_algo(dataset, algo, n_folds, *args):
         rmse = rmse_method(actual, predicted)
         scores.append(rmse)
     return scores
+
+
+# 9.make prediction
+
+def predict(row, coefficients):
+    yhat = coefficients[0]
+    for i in range(len(row) - 1):
+        yhat += coefficients[i + 1] * row[i]
+    return yhat
+
+
+# 10. using stochastic gradient descent method to calculate the coefficient
+def sgd_method_to_calculate_coefficient(training_data, learning_rate, n_epoch):
+    coefficients_list = [0.0 for i in range(len(training_data[0]))]
+    for epoch in range(n_epoch):
+        for row in training_data:
+            yhat = predict(row, coefficients_list)
+            # typo
+            error = yhat - row[-1]
+            coefficients_list[0] = coefficients_list[0] - learning_rate * error
+            for i in range(len(row) - 1):
+                coefficients_list[i + 1] = coefficients_list[i + 1] - learning_rate * error * row[i]
+            # print(learning_rate, n_epoch, error)
+    return coefficients_list
+
+
+# 11. using linear regression algo
+
+def using_sgd_method_to_calculate_linear_regression(training_data, testing_data, learning_rate, n_epoch):
+    predictions = list()
+    coefficients_list = sgd_method_to_calculate_coefficient(training_data, learning_rate, n_epoch)
+    for row in testing_data:
+        yhat = predict(row, coefficients_list)
+        predictions.append(yhat)
+    return (predictions)
+
+
+# 12. Using our real wine quality data
+seed(1)
+wine_quality_data_name = 'winequality-white.csv'
+dataset = csv_loader(wine_quality_data_name)
+for i in range(len(dataset[0])):
+    string_to_float_converter(dataset, i)
+
+# 12.Normalization
+
+
+min_and_max = find_the_min_and_max_of_our_dataset(dataset)
+normalization(dataset, min_and_max)
+
+# 13.How good is our algo
+n_folds = 5
+learning_rate = 0.1
+n_epoch = 50
+
+algo_score = how_good_is_our_algo(dataset, using_sgd_method_to_calculate_linear_regression, n_folds, learning_rate,
+                                  n_epoch)
+
+print("Our algo's score is %s" % algo_score)
+print("The mean of our algo's RMSE is %.3f" % (sum(algo_score) / float(len(algo_score))))
