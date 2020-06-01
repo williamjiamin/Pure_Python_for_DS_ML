@@ -126,7 +126,7 @@ seed(4)
 split = 0.6
 
 # 读取数据
-data_set = load_csv('insurance.csv')
+data_set = load_csv('../Y.Kaggle_Data/insurance.csv')
 # 数据准备
 for i in range(len(data_set[0])):
     string_converter(data_set, i)

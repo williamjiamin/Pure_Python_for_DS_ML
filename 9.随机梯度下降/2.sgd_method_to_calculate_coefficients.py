@@ -1,3 +1,5 @@
+# Created by william from lexueoude.com. 更多正版技术视频讲解，公众号：乐学FinTech
+
 def make_prediction(input_row, coefficients):
     out_put_y_hat = coefficients[0]
     for i in range(len(input_row) - 1):

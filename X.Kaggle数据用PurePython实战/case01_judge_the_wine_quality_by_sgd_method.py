@@ -1,3 +1,5 @@
+# Created by william from lexueoude.com. 更多正版技术视频讲解，公众号：乐学FinTech
+
 # 1.load csv
 # 2.convert string to float
 # 3.normalization
