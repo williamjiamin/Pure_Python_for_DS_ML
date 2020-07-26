@@ -29,3 +29,20 @@ dataset = read_csv(filename)
 for i in range(len(dataset[0]) - 1):
     change_string_to_float(dataset, i)
 print(dataset)
+
+
+# 4.change string column to int
+# 重点关注，核心思想在于通过i进行每一列的数据类型转换（i）
+
+def change_str_column_to_int(dataset, column):
+    class_value = [row[column] for row in dataset]
+    unique_value = set(class_value)
+
+    search_tool = dict()
+
+    for i, value in enumerate(unique_value):
+        search_tool[value] = i
+
+    for row in dataset:
+        row[column] = search_tool[row[column]]
+    return search_tool
