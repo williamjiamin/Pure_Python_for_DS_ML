@@ -40,7 +40,7 @@ def get_split(dataset):
             print("X%d < %.3f Gini=%.3f" % ((index + 1), row[index], gini))
             if gini < posi_score:
                 posi_index, posi_value, posi_score, posi_groups = index, row[index], gini, groups
-    return {'The Best Index is': posi_index, 'The Best Value is': posi_value, 'The Best Groups is ': posi_groups}
+    return {'index': posi_index, 'value': posi_value, 'groups': posi_groups}
 
 
 dataset = [[2.1, 1.1, 0],
@@ -55,4 +55,4 @@ dataset = [[2.1, 1.1, 0],
            [9.7, 6.9, 1]]
 
 split = get_split(dataset)
-print('Split:[X%d < %.3f]' % ((split['The Best Index is'] + 1), split['The Best Value is']))
+print('Split:[X%d < %.3f]' % ((split['index'] + 1), split['value']))
