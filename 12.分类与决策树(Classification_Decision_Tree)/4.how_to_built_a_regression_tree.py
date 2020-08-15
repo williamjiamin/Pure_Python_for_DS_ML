@@ -103,4 +103,34 @@ def print_our_tree(node, depth=0):
         print('%s[%s]' % ((depth * '-', node)))
 
 
+def make_prediction(node, row):
+    if row[node['index']] < node['value']:
+        if isinstance(node['left'], dict):
+            return make_prediction(node['left'], row)
+        else:
+            return node['left']
+    else:
+        if isinstance(node['right'], dict):
+            return make_prediction(node['right'], row)
+        else:
+            return node['right']
 
+
+dataset = [[2.1, 1.1, 0],
+           [3.4, 2.5, 0],
+           [1.3, 5.8, 0],
+           [1.9, 8.6, 0],
+           [3.7, 6.2, 0],
+           [8.8, 1.1, 1],
+           [9.6, 3.4, 1],
+           [10.2, 7.4, 1],
+           [7.7, 8.8, 1],
+           [9.7, 6.9, 1]]
+
+tree = build_the_regression_tree(dataset, 3, 1)
+print_our_tree(tree)
+
+decision_tree_stump = {'index': 0, 'right': 1, 'value': 9.3, 'left': 0}
+for row in dataset:
+    prediction = make_prediction(decision_tree_stump, row)
+    print("What is expected data : %d , Your prediction is %d " % (row[-1], prediction))
