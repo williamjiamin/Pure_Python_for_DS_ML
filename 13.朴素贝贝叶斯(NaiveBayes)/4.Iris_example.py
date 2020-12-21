@@ -9,7 +9,7 @@ from math import exp
 from math import pi
 
 
-# csv reader
+# csv reader helper function
 
 def load_csv(filename):
     dataset = list()
@@ -154,3 +154,24 @@ def naive_bayes(train, test):
         prediction = predict(description, row)
         predictions.append(prediction)
     return predictions
+
+
+dataset = load_csv('iris.csv')
+print(dataset)
+
+print('--------------------')
+for i in range(len(dataset[0]) - 1):
+    convert_str_to_float(dataset, i)
+
+print(dataset)
+
+convert_str_to_int(dataset, len(dataset[0]) - 1)
+
+print('--------------------')
+print(dataset)
+
+n_folds = 5
+scores = whether_our_model_is_good_or_not(dataset, naive_bayes, n_folds)
+
+print("The score of our model is : 【 %s 】" % scores)
+print('The accuracy of our model is : %.6f%% ' % (sum(scores) / float(len(scores))))
