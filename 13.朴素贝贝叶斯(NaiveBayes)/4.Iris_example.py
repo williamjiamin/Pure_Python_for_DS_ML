@@ -118,3 +118,39 @@ def describe_our_data_by_class(dataset):
     for class_value, rows in data_split.items():
         description[class_value] = describe_our_data(rows)
     return description
+
+
+def calculate_the_probability(x, mean, stdev):
+    exponent = exp(-((x - mean) ** 2 / (2 * stdev ** 2)))
+    result = (1 / (sqrt(2 * pi) * stdev)) * exponent
+    return result
+
+
+def calculate_the_probability_by_class(description, row):
+    total_rows = sum([description[label][0][2] for label in description])
+    probabilities = dict()
+    for class_value, class_description, in description.items():
+        probabilities[class_value] = description[class_value][0][2] / float(total_rows)
+        for i in range(len(class_description)):
+            mean, stdev, count = class_description[i]
+            probabilities[class_value] *= calculate_the_probability(row[i], mean, stdev)
+    return probabilities
+
+
+def predict(description, row):
+    probabilities = calculate_the_probability_by_class(description, row)
+    best_label, best_prob = None, -1
+    for class_value, probability in probabilities.items():
+        if best_label is None or probability > best_prob:
+            best_prob = probability
+            best_label = class_value
+    return best_label
+
+
+def naive_bayes(train, test):
+    description = describe_our_data_by_class(train)
+    predictions = list()
+    for row in test:
+        prediction = predict(description, row)
+        predictions.append(prediction)
+    return predictions
