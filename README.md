@@ -20,7 +20,7 @@
 
 
 
-## 网易云课堂：[乐学偶得](https://study.163.com/provider/400000000627054/index.htm?share=2&shareId=400000000627054)
+## 为了保障您的权益，请不要在三方平台或者盗版渠道购买。 唯一官方课堂——偶得课堂：[偶得课堂](https://class.lexueoude.com)
 
 
 
