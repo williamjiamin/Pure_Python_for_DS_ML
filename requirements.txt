@@ -1,0 +1,10 @@
+# Pure Python for Data Science & Machine Learning
+#
+# Core ML algorithms use ONLY Python's standard library (math, random, csv).
+# The packages below are OPTIONAL and used only for data visualization
+# in some notebooks.
+
+matplotlib>=3.0
+seaborn>=0.9
+pandas>=1.0
+numpy>=1.19
