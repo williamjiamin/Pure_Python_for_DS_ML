@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pure Python DS/ML Preview</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["$", "$"], ["\\(", "\\)"]],
+          displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+        },
+        svg: {
+          fontCache: "global"
+        },
+        startup: {
+          typeset: false,
+          ready() {
+            MathJax.startup.defaultReady();
+            window.dispatchEvent(new Event("mathjax-ready"));
+          }
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <p class="eyebrow">Local Preview</p>
+          <h1>Pure Python<br>DS + ML</h1>
+          <p class="brand-copy">A browser preview of your course before publish.</p>
+        </div>
+
+        <div class="sidebar-controls">
+          <label class="search">
+            <span>Search lessons</span>
+            <input id="searchInput" type="search" placeholder="Chapter, topic, keyword">
+          </label>
+          <div class="progress-card">
+            <div class="progress-topline">
+              <span>Progress</span>
+              <strong id="progressLabel">0 / 0</strong>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-bar-fill" id="progressFill"></div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="chapter-list" id="chapterList" aria-label="Lessons"></nav>
+      </aside>
+
+      <main class="main">
+        <header class="hero">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle navigation">Browse</button>
+          <div class="hero-copy">
+            <p class="eyebrow">Interactive preview</p>
+            <h2 id="heroTitle">Choose a chapter</h2>
+            <div class="hero-chips" id="heroChips">
+              <span class="hero-chip">Local curriculum</span>
+            </div>
+          </div>
+          <div class="hero-actions">
+            <button class="ghost-button" id="markReview">Review later</button>
+            <button class="solid-button" id="markComplete">Mark complete</button>
+          </div>
+        </header>
+
+        <section class="overview-grid">
+          <article class="info-card">
+            <p class="card-label">Why it matters</p>
+            <p id="chapterSummary">Select a lesson from the left to load the chapter preview.</p>
+          </article>
+          <article class="info-card">
+            <p class="card-label">Learning goals</p>
+            <ul class="goal-list" id="goalList">
+              <li>Search and open any chapter.</li>
+              <li>Check the rendered lesson content.</li>
+              <li>Review script and notebook links before publish.</li>
+            </ul>
+          </article>
+          <article class="info-card">
+            <p class="card-label">Assignments</p>
+            <ul class="goal-list" id="assignmentList">
+              <li>Pick a chapter and inspect the layout.</li>
+              <li>Use notes and completion state to test the flow.</li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="lesson-layout">
+          <article class="lesson-panel">
+            <div class="lesson-panel-header">
+              <div>
+                <p class="eyebrow">Lesson</p>
+                <h3 id="lessonTitle">Course preview</h3>
+              </div>
+              <div class="resource-links" id="resourceLinks"></div>
+            </div>
+            <div class="lesson-content markdown-body" id="lessonContent"></div>
+          </article>
+
+          <aside class="workspace-panel">
+            <section class="workspace-card">
+              <div class="workspace-header">
+                <p class="card-label">Notes</p>
+                <span id="noteStatus">Saved locally</span>
+              </div>
+              <textarea id="notesArea" placeholder="Write review notes for this chapter..."></textarea>
+            </section>
+
+            <section class="workspace-card">
+              <div class="workspace-header">
+                <p class="card-label">Implementation files</p>
+                <span id="fileMeta">No file selected</span>
+              </div>
+              <div class="file-tabs" id="fileTabs"></div>
+              <pre class="code-viewer"><code id="codeViewer">Choose a lesson to inspect its Python source here.</code></pre>
+            </section>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  </body>
+</html>
